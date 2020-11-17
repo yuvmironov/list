@@ -28,6 +28,20 @@ const actions = {
       .then(response => {
         return response
       })
+  },
+  createTask (context, data) {
+    return axios({
+      method: 'POST',
+      url: 'https://limitless-headland-64818.herokuapp.com/createTask',
+      data: data,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept-Language': 'ru-RU'
+      }
+    })
+      .then(response => {
+        return response
+      })
   }
 }
 

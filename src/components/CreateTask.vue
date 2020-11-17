@@ -25,6 +25,10 @@
 </template>
 
 <script>
+function createDate () {
+  const date = new Date()
+  return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`
+}
 export default {
   props: {
     flagShow: {
@@ -53,9 +57,18 @@ export default {
     },
     saveTask () {
       if (this.taskName) {
-        this.$emit('saveTask', { name: this.taskName, desc: this.taskDesc })
+        this.$emit('saveTask', {
+          nameTask: this.taskName,
+          description: this.taskDesc,
+          dateCreate: createDate(),
+          completeStatus: false,
+          arhive: false
+        })
+        this.taskName = ''
+        this.taskDesc = ''
       } else {
-
+        this.empty.status = false
+        this.empty.text = 'Не все обязательные поля заполнены'
       }
     }
   }

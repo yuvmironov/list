@@ -54,10 +54,25 @@ export default {
       this.flagCreateTask = data
     },
     createNewTask (data) {
-      console.log(data)
+      this.$store.commit('setLoaderFlag', true)
+      const dataT = {
+        user: localStorage.getItem('user'),
+        task: data
+      }
+      this.$store.dispatch('createTask', dataT)
+        .then(response => {
+          if (response.data.status === 200) {
+            this.flagCreateTask = false
+            this.getData()
+          } else {
+            // TODO: Проработать ошибку создания
+          }
+        })
+        .catch(() => {
+          // TODO: Проработать ошибку создания
+        })
     },
     changeT (e) {
-      console.log(e.target.id)
       for (let i = 0; i < this.dataForComponent.length; i++) {
         if (this.dataForComponent[i]._id === e.target.id) {
           this.dataForComponent[i].completeStatus = true
@@ -68,7 +83,6 @@ export default {
       console.log('Edit task', id)
     },
     deleteT (id) {
-      console.log('Delete task', id)
       this.$store.commit('setLoaderFlag', true)
       this.$store.dispatch('deleteTask', { id: id, user: localStorage.getItem('user') })
         .then(response => {
