@@ -42,7 +42,7 @@ export default {
   data () {
     return {
       dataForComponent: [],
-      flagCreateTask: true
+      flagCreateTask: false
     }
   },
   components: {
