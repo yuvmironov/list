@@ -27,7 +27,6 @@
 .Content
   display flex
   padding 15px
-  height 100%
   &-Menu
     flex-basis 10%
   &-Tasks
