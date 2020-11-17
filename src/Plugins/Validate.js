@@ -1,10 +1,12 @@
 export default {
-  install (Vue) {
+  install: function (Vue) {
     console.log('Validation plugin start')
     /**
      * Валидация данных
-     * @param sendingData {typeValidation: String, dataForValid: Object}
-     * @returns {boolean}
+     * @param { Object } sendingData - данные для валидации
+     * @param { string } sendingData.type - Тип валидации
+     * @param { string } sendingData.data - Данные для валидации
+     * @returns { boolean }
      */
     Vue.prototype.$NewValid = function (param) {
       const result = {
@@ -12,6 +14,16 @@ export default {
         text: ''
       }
       switch (param.type) {
+        case 'empty':
+          console.log(param)
+          if (param.data) {
+            result.status = true
+            result.text = ''
+          } else {
+            result.status = false
+            result.text = 'Поле не может быть пустым'
+          }
+          break
         case 'login':
           if (param.data.length > 5 && param.data.match(/[A-я]/g)) {
             result.status = true

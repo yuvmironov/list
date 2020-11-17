@@ -17,7 +17,8 @@
       />
     </div>
     <CreateTask :flagShow = 'flagCreateTask'
-      @closeWindow="changeFlagCreateTask"
+                @closeWindow="changeFlagCreateTask"
+                @saveTask = "createNewTask"
     />
   </div>
 </template>
@@ -52,6 +53,9 @@ export default {
   methods: {
     changeFlagCreateTask (data) {
       this.flagCreateTask = data
+    },
+    createNewTask (data) {
+      console.log(data)
     },
     changeT (e) {
       console.log(e.target.id)
