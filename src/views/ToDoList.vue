@@ -73,9 +73,19 @@ export default {
         })
     },
     changeT (e) {
+      this.$store.commit('setLoaderFlag', true)
       for (let i = 0; i < this.dataForComponent.length; i++) {
         if (this.dataForComponent[i]._id === e.target.id) {
-          this.dataForComponent[i].completeStatus = true
+          this.$store.dispatch('endTask', { user: localStorage.getItem('user'), id: e.target.id })
+            .then(response => {
+              console.log(response)
+              if (response.data.status === 200) {
+                this.dataForComponent[i].completeStatus = true
+              }
+            })
+            .finally(() => {
+              this.$store.commit('setLoaderFlag', false)
+            })
         }
       }
     },

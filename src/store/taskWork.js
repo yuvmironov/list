@@ -42,6 +42,20 @@ const actions = {
       .then(response => {
         return response
       })
+  },
+  endTask (context, data) {
+    return axios({
+      method: 'POST',
+      url: 'https://limitless-headland-64818.herokuapp.com/endTask',
+      data: data,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept-Language': 'ru-RU'
+      }
+    })
+      .then(response => {
+        return response
+      })
   }
 }
 
