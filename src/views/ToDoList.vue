@@ -1,7 +1,7 @@
 <template>
   <div class="Content">
     <menu class="Content-Menu">
-      <p>Создать задачу</p>
+      <p @click="changeFlagCreateTask(true)">Создать задачу</p>
       <p>Архив задач</p>
       <p>Выход</p>
     </menu>
@@ -16,6 +16,9 @@
                class="Home-OneTask"
       />
     </div>
+    <CreateTask :flagShow = 'flagCreateTask'
+      @closeWindow="changeFlagCreateTask"
+    />
   </div>
 </template>
 
@@ -38,13 +41,18 @@ export default {
   name: 'Home',
   data () {
     return {
-      dataForComponent: []
+      dataForComponent: [],
+      flagCreateTask: true
     }
   },
   components: {
-    OneTask: () => import('@/components/OneTask.vue')
+    OneTask: () => import('@/components/OneTask.vue'),
+    CreateTask: () => import('@/components/CreateTask')
   },
   methods: {
+    changeFlagCreateTask (data) {
+      this.flagCreateTask = data
+    },
     changeT (e) {
       console.log(e.target.id)
       for (let i = 0; i < this.dataForComponent.length; i++) {
