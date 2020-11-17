@@ -242,7 +242,7 @@ export default {
     Registration () {
       if (this.passMessage.status && this.mailMessage.status && this.userMessage.status && this.passRegMess.status && this.passRepMess.status) {
         if (this.registrationForm.email && this.registrationForm.login && this.registrationForm.repPassword && this.registrationForm.password) {
-          // включит лоадер
+          this.$store.commit('setLoaderFlag', true)
           this.$store.dispatch('registrationAction', this.registrationForm)
             .then(response => {
               console.log(response)
@@ -253,6 +253,12 @@ export default {
                 localStorage.setItem('user', this.registrationForm.login)
                 this.$router.push('home')
               }
+            })
+            .catch(() => {
+
+            })
+            .finally(() => {
+              this.$store.commit('setLoaderFlag', false)
             })
         } else {
           this.regError = true

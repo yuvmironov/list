@@ -1,8 +1,18 @@
 <template>
   <div class="Footer">
-    Подвал
+    Подвал {{ version }}
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      version: process.env.VUE_APP_VERSION
+    }
+  }
+}
+</script>
 
 <style lang="stylus">
 .Footer
