@@ -5,13 +5,14 @@
       <form action="" class="EditTask-Form">
         <label class="EditTask-Label" for="NameTaskChange">Название задачи</label>
         <input v-model="taskChange.nameTask"
+               @keyup="validEmpty"
                class="EditTask-Input"
                type="text"
                id="NameTaskChange"
                placeholder="Введите название задачи">
-        <!--<div class="Err-Message"
+        <div class="Err-Message"
              :class="{ 'Err-Message_Err' : !empty.status, 'Err-Message_Suc' : empty.status }"
-        >{{ empty.text }}</div>-->
+        >{{ empty.text }}</div>
         <label class="EditTask-Label" for="DescriptionTaskChange">Описание задачи</label>
         <textarea v-model="taskChange.description" class="EditTask-TextArea" id="DescriptionTaskChange" placeholder="Введите описание задачи"></textarea>
         <div class="EditTask-Buttons">
@@ -35,12 +36,25 @@ export default {
       required: true
     }
   },
+  data () {
+    return {
+      empty: {
+        status: Boolean,
+        text: ''
+      }
+    }
+  },
   methods: {
     closeWindow () {
       this.$emit('closeWindow', false)
     },
     saveTask () {
       this.$emit('saveTask', this.taskChange)
+    },
+    validEmpty () {
+      const validResult = this.$NewValid({ type: 'empty', data: this.taskChange.nameTask })
+      this.empty.status = validResult.status
+      this.empty.text = validResult.text
     }
   },
   computed: {
