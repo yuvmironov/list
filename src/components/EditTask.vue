@@ -1,7 +1,6 @@
 <template>
   <div class="EditTask" v-show="flagShow">
     <div class="EditTask-Content">
-      {{ taskChange }}
       <span class="EditTask-Close" @click="closeWindow">X</span>
       <form action="" class="EditTask-Form">
         <label class="EditTask-Label" for="NameTaskChange">Название задачи</label>

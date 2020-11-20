@@ -20,6 +20,11 @@
                 @closeWindow="changeFlagCreateTask"
                 @saveTask = "createNewTask"
     />
+    <EditTask :flagShow = 'flagEditTask'
+              :task = 'taskForChange'
+              @closeWindow = 'changeFlagEditTask'
+              @saveTask = 'editTaskSave'
+    />
   </div>
 </template>
 
@@ -42,16 +47,22 @@ export default {
   data () {
     return {
       dataForComponent: [],
-      flagCreateTask: false
+      flagCreateTask: false,
+      flagEditTask: false,
+      taskForChange: {}
     }
   },
   components: {
     OneTask: () => import('@/components/OneTask.vue'),
-    CreateTask: () => import('@/components/CreateTask')
+    CreateTask: () => import('@/components/CreateTask'),
+    EditTask: () => import('@/components/EditTask')
   },
   methods: {
     changeFlagCreateTask (data) {
       this.flagCreateTask = data
+    },
+    changeFlagEditTask (data) {
+      this.flagEditTask = data
     },
     createNewTask (data) {
       this.$store.commit('setLoaderFlag', true)
@@ -91,6 +102,29 @@ export default {
     },
     editT (id) {
       console.log('Edit task', id)
+      this.flagEditTask = true
+      for (let i = 0; i < this.dataForComponent.length; i++) {
+        if (this.dataForComponent[i]._id === id) {
+          this.taskForChange = this.dataForComponent[i]
+        }
+      }
+    },
+    editTaskSave (task) {
+      this.$store.commit('setLoaderFlag', true)
+      this.$store.dispatch('updateTask', { user: localStorage.getItem('user'), taskForUpdate: task })
+        .then(response => {
+          if (response.data.status === 200) {
+            this.getData()
+          } else {
+            // TODO: Проработать ответ на ошибку
+          }
+        })
+        .catch((e) => {
+          // TODO: Проработать ответ на ошибку
+        })
+        .finally(() => {
+          this.flagEditTask = false
+        })
     },
     deleteT (id) {
       this.$store.commit('setLoaderFlag', true)
