@@ -144,7 +144,17 @@ export default {
         })
     },
     arhiveT (id) {
-      console.log(id)
+      this.$store.commit('setLoaderFlag', true)
+      this.$store.dispatch('zipTask', { user: localStorage.getItem('user'), id: id })
+        .then(response => {
+          if (response.data.status === 200) {
+            console.log('Задача отправлена в архив')
+            this.getData()
+          }
+        })
+        .finally(() => {
+          this.$store.commit('setLoaderFlag', false)
+        })
     },
     getData () {
       this.$store.dispatch('getData', { collection: localStorage.getItem('user') })

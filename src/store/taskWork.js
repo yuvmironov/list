@@ -67,6 +67,18 @@ const actions = {
         'Accept-Language': 'ru-RU'
       }
     })
+  },
+  zipTask (context, data) {
+    return axios({
+      method: 'POST',
+      // url: 'https://listnode.herokuapp.com/updateTask',
+      url: 'http://localhost:3000/zipTask',
+      data: data,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Accept-Language': 'ru-RU'
+      }
+    })
   }
 }
 

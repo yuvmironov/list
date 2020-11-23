@@ -1,5 +1,5 @@
 <template>
-  <div class="OneTask">
+  <div class="OneTask" v-if = "!data.arhive">
     <p class="OneTask-Name" @click="showDecs" :class="{ 'OneTask-Name_Complete' : data.completeStatus }">{{data.dateCreate}} {{ data.nameTask }}</p>
     <div class="OneTask-Control">
       <img class="OneTask-Edit ControlElement" @click="editTask(data)" src="@/assets/image/writing.svg">
