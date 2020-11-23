@@ -5,7 +5,7 @@ const actions = {
     return axios({
       method: 'GET',
       params: collection,
-      url: 'https://limitless-headland-64818.herokuapp.com/loadDocuments',
+      url: 'https://listnode.herokuapp.com/loadDocuments',
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         'Accept-Language': 'ru-RU'
@@ -18,7 +18,7 @@ const actions = {
   deleteTask (context, data) {
     return axios({
       method: 'POST',
-      url: 'https://limitless-headland-64818.herokuapp.com/deleteTask',
+      url: 'https://listnode.herokuapp.com/deleteTask',
       data: data,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -32,7 +32,7 @@ const actions = {
   createTask (context, data) {
     return axios({
       method: 'POST',
-      url: 'https://limitless-headland-64818.herokuapp.com/createTask',
+      url: 'https://listnode.herokuapp.com/createTask',
       data: data,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -46,7 +46,7 @@ const actions = {
   endTask (context, data) {
     return axios({
       method: 'POST',
-      url: 'https://limitless-headland-64818.herokuapp.com/endTask',
+      url: 'https://listnode.herokuapp.com/endTask',
       data: data,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
@@ -60,7 +60,7 @@ const actions = {
   updateTask (context, data) {
     return axios({
       method: 'POST',
-      url: 'https://limitless-headland-64818.herokuapp.com/updateTask',
+      url: 'https://listnode.herokuapp.com/updateTask',
       data: data,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
